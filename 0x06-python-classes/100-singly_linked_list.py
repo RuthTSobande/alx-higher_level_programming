@@ -1,92 +1,83 @@
-
 #!/usr/bin/python3
-"""Defination classes of singly linked list"""
 
 
 class Node:
-    """Define a node of a singly linked list"""
+    """Node of a singly linked list.
+    Private instance attribute: data:
+        - property def data(self)
+        - property setter def data(self, value)
+    Private instance attribute: next_node:
+        - property def next_node(self)
+        - property setter def next_node(self, value)
+    Representation with data and next_node.
+    """
 
     def __init__(self, data, next_node=None):
-        """Initialize node data
-        Args:
-            data (int): value to be assigned to `data`
-            next_node (Node): object of type Node
-        Raises:
-            TypeError: 'data' isn't an integer or 'next_node' not a
-                        node object
-        """
-        if not isinstance(data, int):
-            raise TypeError("data must be an integer")
-        if not isinstance(next_node, Node) and next_node is not None:
-            raise TypeError("next_node must be a Node object")
-        self.__data = data
-        self.__next_node = next_node
+        """Initialise data of the node."""
+        self.data = data
+        self.next_node = next_node
 
     @property
     def data(self):
-        """retrieves value of data attribute"""
+        """Retrieve data from the node."""
         return self.__data
 
     @data.setter
     def data(self, value):
-        """Sets a new value to 'data' attribute
-        Args:
-            value (int): number to assign to 'data'
-        Raises:
-            TypeError: if data isn't an integer
-        """
+        """Set data into a node."""
         if not isinstance(value, int):
             raise TypeError("data must be an integer")
         self.__data = value
 
     @property
     def next_node(self):
-        """retrieves value of 'next_node'"""
+        """Retrieve next_node."""
         return self.__next_node
 
     @next_node.setter
     def next_node(self, value):
-        """Sets a new value to 'next_node'
-        Args:
-            value (Node): object of Noden to assign to 'next_node'
-        Raises:
-            TypeError: if value is not a Node object
-        """
+        """Sets the next_node."""
         if not isinstance(value, Node) and value is not None:
             raise TypeError("next_node must be a Node object")
         self.__next_node = value
 
 
 class SinglyLinkedList:
-    """Define implementation of a singly linked list"""
+    """ Singly linked list.
+    Private instance attribute: head.
+    Simple instantiation.
+    Public instance method: def sorted_insert(self, value).
+    """
 
     def __init__(self):
-        """Initialise instance data"""
-        self.__head = None
+        """Initializes the linked list."""
+        self.head = None
 
     def __str__(self):
-        """Prints the entire list in stdout"""
-        head = self.__head
-        values = []
-        while head is not None:
-            values.append("{}".format(head.data))
-            head = head.next_node
-        return "\n".join(values)
+        """For the print statement in the main file."""
+        my_str = ""
+        node = self.head
+        while node:
+            my_str += str(node.data)
+            my_str += '\n'
+            node = node.next_node
+        return my_str[:-1]
 
     def sorted_insert(self, value):
-        """Insert a new Node into the list
-        Args:
-            value (int): integer to assign to 'data' of Node object
-        """
-        head = self.__head
-        if head is None or (head is not None and head.data >= value):
-            new_node = Node(value, head)
-            self.__head = new_node
+        """Inserts a node in a sorted linked list."""
+        new_node = Node(value)
+
+        if self.head is None:
+            self.head = new_node
             return
-        while head is not None:
-            next_node = head.next_node
-            if next_node is None or next_node.data >= value:
-                new_node = Node(value, next_node)
-                head.next_node = new_node
-                break
-            head = next_node
+
+        if value < self.head.data:
+            new_node.next_node = self.head
+            self.head = new_node
+            return
+
+        node = self.head
+        while node.next_node and node.next_node.data < value:
+            node = node.next_node
+        new_node.next_node = node.next_node
+        node.next_node = new_node
