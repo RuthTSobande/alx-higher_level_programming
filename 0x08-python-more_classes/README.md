@@ -1,4 +1,4 @@
-#Projects largely dealing with python classes, using a rectangle
+Projects largely deal with python classes, using a rectangle
 1. 0-rectangle: empty rectangle class
 1. 1-rectangle: add width and height, and init
 2. 2-rectangle: add area and perimeter methods
