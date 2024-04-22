@@ -1,1 +1,1 @@
-My new python project
+Ruth T. Sobande's New Python Project
