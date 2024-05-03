@@ -7,8 +7,3 @@ def complex_delete(a_dictionary, value):
             del a_dictionary[value_dic]
 
     return (a_dictionary)
-
-# Parses Apache log files in list format.
-#   Displays the IP and HTTP status code.
-
-awk '{print $1 " " $9}' apache-access.log
