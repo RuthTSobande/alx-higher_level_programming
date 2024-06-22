@@ -1,5 +1,9 @@
 #!/usr/bin/node
-let words = ['C is fun', 'Python is cool', 'Javascript is amazing'];
-for (let i = 0; i < words.length; i++) {
-  console.log(words[i]);
-}
+
+const cString = 'C is fun';
+const pyString = 'Python is cool';
+const jsString = 'JavaScript is amazing';
+
+console.log(cString);
+console.log(pyString);
+console.log(jsString);
