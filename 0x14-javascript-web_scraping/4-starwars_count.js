@@ -1,18 +1,24 @@
 #!/usr/bin/node
 
 const request = require('request');
+const url = process.argv[2];
 
-request(process.argv[2], function (err, res, body) {
-  if (err) console.log(err);
-  else {
-    let wedgefilms = 0;
-    let films = JSON.parse(body).results;
-    for (let film in films) {
-      let characters = films[film].characters;
-      for (let character in characters) {
-        if (characters[character].search(/18\/$/) > -1) wedgefilms++;
+request(url, function (err, response, body) {
+  if (err) {
+    console.log(err);
+  } else if (response.statusCode === 200) {
+    const films = JSON.parse(body).results;
+    let count = 0;
+    for (const filmIndex in films) {
+      const filmChars = films[filmIndex].characters;
+      for (const charIndex in filmChars) {
+        if (filmChars[charIndex].includes('18')) {
+          count++;
+        }
       }
     }
-    console.log(wedgefilms);
+    console.log(count);
+  } else {
+    console.log('An error occured. Status code: ' + response.statusCode);
   }
 });
