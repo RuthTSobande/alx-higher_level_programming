@@ -1,1 +1,1 @@
-# Javascript web scraping Project by Ruth Temiloluwa Sobande <volunteerme2021@gmail.com>
+# Javascript web scraping Project by Ruth Temiloluwa Sobande
